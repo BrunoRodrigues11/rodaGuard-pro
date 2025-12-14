@@ -1,12 +1,19 @@
+import {
+  Task,
+  RoundLog,
+  ChecklistTemplate,
+  User,
+  ReportConfig,
+} from "../types";
 
-import { Task, RoundLog, ChecklistTemplate, User, ReportConfig } from '../types';
-
-const API_URL = 'http://localhost:3001/api';
+const API_URL = "http://nkg8sskcw0ccswcco8oc8wkk.72.62.13.194.sslip.io//api";
 
 // Helper para tratar respostas
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+    const error = await response
+      .json()
+      .catch(() => ({ error: "Erro desconhecido" }));
     throw new Error(error.error || `Erro HTTP: ${response.status}`);
   }
   return response.json();
@@ -16,9 +23,9 @@ export const api = {
   // Auth
   login: async (email: string, password: string): Promise<User> => {
     const res = await fetch(`${API_URL}/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
     });
     return handleResponse(res);
   },
@@ -28,21 +35,21 @@ export const api = {
     const res = await fetch(`${API_URL}/users`);
     return handleResponse(res);
   },
-  
+
   saveUser: async (user: User): Promise<void> => {
     const res = await fetch(`${API_URL}/users`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
     });
     return handleResponse(res);
   },
 
   toggleUserStatus: async (userId: string, active: boolean): Promise<void> => {
     const res = await fetch(`${API_URL}/users/${userId}/status`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ active })
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ active }),
     });
     return handleResponse(res);
   },
@@ -55,16 +62,16 @@ export const api = {
 
   saveTask: async (task: Task): Promise<void> => {
     const res = await fetch(`${API_URL}/tasks`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(task)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(task),
     });
     return handleResponse(res);
   },
 
   deleteTask: async (taskId: string): Promise<void> => {
     const res = await fetch(`${API_URL}/tasks/${taskId}`, {
-      method: 'DELETE'
+      method: "DELETE",
     });
     return handleResponse(res);
   },
@@ -77,16 +84,16 @@ export const api = {
 
   saveTemplate: async (template: ChecklistTemplate): Promise<void> => {
     const res = await fetch(`${API_URL}/templates`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(template)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(template),
     });
     return handleResponse(res);
   },
 
   deleteTemplate: async (id: string): Promise<void> => {
     const res = await fetch(`${API_URL}/templates/${id}`, {
-      method: 'DELETE'
+      method: "DELETE",
     });
     return handleResponse(res);
   },
@@ -99,9 +106,9 @@ export const api = {
 
   saveRound: async (log: RoundLog): Promise<void> => {
     const res = await fetch(`${API_URL}/rounds`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(log)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(log),
     });
     return handleResponse(res);
   },
@@ -114,11 +121,10 @@ export const api = {
 
   saveSettings: async (config: ReportConfig): Promise<void> => {
     const res = await fetch(`${API_URL}/settings`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(config)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(config),
     });
     return handleResponse(res);
-  }
+  },
 };
-    
