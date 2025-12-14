@@ -6,7 +6,7 @@ import {
   ReportConfig,
 } from "../types";
 
-const API_URL = "http://nkg8sskcw0ccswcco8oc8wkk.72.62.13.194.sslip.io//api";
+const API_URL = "https://api-rondaguard.devtiburcio.cloud/api";
 
 // Helper para tratar respostas
 const handleResponse = async (response: Response) => {
